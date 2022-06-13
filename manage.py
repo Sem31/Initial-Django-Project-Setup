@@ -3,11 +3,14 @@
 import os
 import sys
 
+from decouple import config
+
 
 def main():
     """Run administrative tasks."""
     # set local setting file as setdefault
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "simple.settings.local")
+    env_name = config("SIMPLE_ENVIRONMENT", default="local")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"simple.settings.{env_name}")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

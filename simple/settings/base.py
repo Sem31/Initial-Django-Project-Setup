@@ -14,7 +14,7 @@ SECRET_KEY = config("SECRET_KEY", default="django-insecure$simple.settings.local
 
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1, localhost", cast=Csv())
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -78,9 +78,7 @@ TEMPLATES = [
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=config(
-            "DATABASE_URL", default="postgres://simple:simple@localhost:5432/simple"
-        ),
+        default=config("DATABASE_URL", default="postgres://postgres:postgres@localhost:5432/flask"),
         conn_max_age=600,
     )
 }
@@ -147,7 +145,9 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 
-
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 # ==============================================================================
 # THIRD-PARTY SETTINGS
 # ==============================================================================
