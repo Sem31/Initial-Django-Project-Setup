@@ -8,9 +8,11 @@ https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
 """
 
 import os
+from decouple import config
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "simple.settings")
+env_name = config("SIMPLE_ENVIRONMENT", default="local")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"simple.settings.{env_name}")
 
 application = get_wsgi_application()
