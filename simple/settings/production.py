@@ -3,8 +3,22 @@
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+import dj_database_url
 import simple
 from .base import *
+
+
+# ==============================================================================
+# DATABASES SETTINGS
+# ==============================================================================
+
+DATABASES = {
+    "default": dj_database_url.config(
+        default=config("DATABASE_URL", default="postgres://postgres:postgres@localhost:5432/initial"),
+        conn_max_age=600,
+    )
+}
+
 
 # ==============================================================================
 # SECURITY SETTINGS
