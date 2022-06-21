@@ -20,3 +20,6 @@ Setup .env file, using example.env
 
 #### Run project
 > make run
+
+#### Run Testcases
+> make test
