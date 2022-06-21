@@ -16,3 +16,5 @@ down:
 build:
 	docker-compose build
 
+test:
+	python3.8 manage.py test -v 2
