@@ -10,6 +10,7 @@ from django.contrib.auth.models import update_last_login
 
 from rest_framework_jwt.settings import api_settings
 from rest_framework import serializers
+from rest_framework.exceptions import ParseError
 
 from simple.apps.accounts.models import UserProfile
 from simple.apps.accounts.models import User
@@ -33,6 +34,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         profile_data = validated_data.pop("profile")
         user = User.objects.create_user(**validated_data)
+        user.is_staff = True
+        user.is_active = True
+        user.is_superuser = True
+        user.save()
         UserProfile.objects.create(
             user=user,
             first_name=profile_data["first_name"],
